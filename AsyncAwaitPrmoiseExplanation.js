@@ -2,8 +2,7 @@
 //  await pauses the function until the promise is resolved or rejected.
 //  try,, catch is used to catch errors thrown by awaited functions.
 //  async function in JS always returns a Promise, regardless of what you return inside it.
-
-
+//In JavaScript, if you call a function without passing a value for one of its parameters, that parameter will automatically be assigned the value undefined.
 
  async function example() {
     return 123;
@@ -13,14 +12,11 @@
 
  example().then(value => console.log(value));
 
-
-
 //above example eqivalent version using Promise
 
 function example() {
     Promise.resolve(123);
 }
-
 
 //OR
 
@@ -67,3 +63,18 @@ handleRiskyOperation();
 
 
 // HTTP fetchAPI also return a prmoise in return 
+
+
+async function getPost() {
+    try{
+        const response = await fetch("");
+        const data = await response.json(); //parse json from response body which also returns Promise
+    } catch(error) {
+        console.error("Fetch error", error);
+    }
+}
+
+
+getPost()
+.then(data => console.log("result => ", data))
+.catch(error => console.error("error", error.message));
