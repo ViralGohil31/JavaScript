@@ -1,0 +1,12 @@
+1. JavaScript Immutability
+2. Declarative vs Imperative JavaScript
+3. JavaScript Event Loop
+4. Benifit of First class Function
+5. JavaScript Pure Functions
+6. DOM API
+7. Fetch API
+8. Async JavaScript with callback functions.
+8. Async Await vs Prmoises
+9. JavaScript Value vs Rerence 
+10 JavaScript Closure
+
