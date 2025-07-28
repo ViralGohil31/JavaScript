@@ -1,0 +1,87 @@
+class Student {
+    constructor(id, name, grade) {
+        this.id = id;
+        this.name = name;
+        this.grade = grade;
+    }
+    display() {
+        return `ID: ${this.id}, Name: ${this.name}, Grade: ${this.grade}`;
+    }
+}
+
+async function mockFetchStudents() {
+    const students = [
+        new Student(1, 'Alice', 'A'),
+        new Student(1, 'Bob', 'B'),
+      ];
+
+    console.log("student data", JSON.stringify(students));
+
+    return new Promise((resolve, reject) => {
+        setTimeout(()=> {
+            resolve(
+                 new Response(JSON.stringify(students), {
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' }
+                  })
+            );
+        }, 1000);
+    });
+}
+
+function getStudentUsingPromise() {
+    const url = "https://api.example.com/students";
+
+    //fetch(url)
+    mockFetchStudents()
+    .then((response) => {
+        if(!response.ok) {
+            throw new Error("Error while fetching students"); //this will caught by catch block
+        }
+        console.log("response",response);
+        return response.json();
+    })
+    .then((data) => {
+        console.log("data", data);
+        if(!Array.isArray(data)) {
+            throw new Error("Invalid student data format"); //will get caught by catch block
+        }
+       
+        return data.map((item) => new Student(item.id, item.name, item.grade))
+    })
+    .then((students) => {
+        students.forEach((s) => console.log(s.display()));
+    })
+    .catch(error => {
+        console.error("Error" , error.message);
+    });
+}
+
+// Above example using Async await
+
+
+async function fetchStudentsUsingAsyncAwait() {
+    const url = "https://api.example.com/students";
+    try{
+        //const response = await fetch(url);
+        const response = await mockFetchStudents();
+        if(!response.ok) {
+            throw new Error("error while fetching students");
+        }
+
+        const data = await response.json();
+        if(!Array.isArray(data)) {
+            throw new Error("Unexpected response format");
+        }
+        
+        const students = data.map((item)=> new Student(item));
+        console.log(students);
+
+
+    } catch(error) {
+        console.error("Caught error", error.message);
+    }
+}
+
+getStudentUsingPromise();
+fetchStudentsUsingAsyncAwait();

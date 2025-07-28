@@ -4,6 +4,8 @@
 //  async function in JS always returns a Promise, regardless of what you return inside it.
 //In JavaScript, if you call a function without passing a value for one of its parameters, that parameter will automatically be assigned the value undefined.
 
+// every .then() in a promise chain always returns a new Promise, even if you don’t explicitly return one.
+
  async function example() {
     return 123;
  }
