@@ -6,6 +6,13 @@
 
 // every .then() in a promise chain always returns a new Promise, even if you don’t explicitly return one.
 
+// await does not hold or block the current thread in java script. when await is encountered , it pauses only the async function it is inside,
+// not the whole thread.
+// the rest of the Javascript (other functions , event listener, timers, UI updates) continues running.
+// when the awaited Prmoise settles (resolve or reject), the paused async function resumes from where it left off.
+
+
+
  async function example() {
     return 123;
  }

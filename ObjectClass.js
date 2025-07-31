@@ -36,3 +36,14 @@ person.sayBye = function() {
 }
 
 person.sayBye();
+
+function createMachineUsingLiteralSyntax(name, status) {
+    return {
+        name,
+        status
+    };
+}
+
+console.log(createMachineUsingLiteralSyntax("Test", "running")); //{name: 'Test', status: 'running'}
+
+
