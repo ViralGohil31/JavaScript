@@ -60,15 +60,57 @@ let [
 
 console.log({firstName, addressLine1});
 
+//Object destructuring
+
+let employee = {
+    id: 101,
+    name: {
+        firstName: "John",
+        lastName: "Doe"
+    }
+};
+
+
+let {
+    id,
+    name: {
+        firstName1,
+        lastName1
+    }
+} = employee;
+
+console.log(firstName1);
+console.log(id);
+
+
+//Nested Array of Object destruction
 
 function getUserProfile() {
     return [
-        {id: "1", FullName: "ABC", grade: "A", address: ["Mira Road", "Thane"]},
-        {id: "2", FullName: "PQR", grade: "B", address: ["Kandivali", "Mumbai"]}
+        {id: "1", FullName: "Viral Gohil", grade: "A", address: [{city: "Mira Road", district: "Thane"}, {city: "Kandivali", district:"Mumbai"}]},
+        {id: "2", FullName: "PQR", grade: "B", address: [{city: "Goregaon", district:"Mumbai"}]}
     ]
 }
 
+let [firstUser] = getUserProfile();
+
+[{id, FullName, grade, address: [{city, district}] }] = getUserProfile(); // get first user with first address only
+
+console.log("FullName ", FullName, "address City", city);
 
 
+[{id, FullName, grade, address }] = getUserProfile(); //first user with both the address refer in address field
+
+for(const {city, district} of address) {
+    console.log("City", city, "district", district);
+}
 
 
+//Looping all the elements of userProfile
+
+for(const {id, fullName, grade, address} of getUserProfile()) {
+    console.log("Id : ", id, "FullName : ", fullName, "grade : ", grade);
+    for(const {city, district} of address) {
+        console.log("city : ", city, "district :", district);
+    }
+}
