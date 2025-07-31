@@ -39,15 +39,15 @@ function getStudentUsingPromise() {
             throw new Error("Error while fetching students"); //this will caught by catch block
         }
         console.log("response",response);
-        return response.json();
+        return response.json(); // this .json also return a promise ,as then always return a new promise but here we are already return a promise so it will adopt the state of already return prmoise and will return this prmoise only to next then
     })
     .then((data) => {
-        console.log("data", data);
+        console.log("data", data); // this waits until .json() resolves in previous .then 
         if(!Array.isArray(data)) {
             throw new Error("Invalid student data format"); //will get caught by catch block
         }
        
-        return data.map((item) => new Student(item.id, item.name, item.grade))
+        return data.map((item) => new Student(item.id, item.name, item.grade)); // wrap the Student object into Promise
     })
     .then((students) => {
         students.forEach((s) => console.log(s.display()));
@@ -57,7 +57,7 @@ function getStudentUsingPromise() {
     });
 }
 
-// Above example using Async await
+// below example using Async await
 
 
 async function fetchStudentsUsingAsyncAwait() {
