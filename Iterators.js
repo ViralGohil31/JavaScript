@@ -82,3 +82,29 @@ function paginate(api, totalPage) {
 
 // custom Object iteration
 
+
+class Playlist{
+    constructor(songs) {
+        this.songs = songs;
+    }
+
+    [Symbol.iterator]() {
+        let index = 0;
+        const songs = this.songs;
+        return {
+            next() {
+                if (index <= songs.length) {
+                    return {value: songs[index++], done: false};
+                }
+                return {done: true};
+            }
+        };
+    }
+}
+
+
+const myPlayList = new Playlist(["song1", "song2", "song3"]);
+
+for(const song of myPlayList) {
+    console.log("Playing", song);
+}
