@@ -4,6 +4,8 @@ class Student {
         this.name = name;
         this.grade = grade;
     }
+
+
     display() {
         return `ID: ${this.id}, Name: ${this.name}, Grade: ${this.grade}`;
     }
@@ -13,6 +15,8 @@ async function mockFetchStudents() {
     const students = [
         new Student(1, 'Alice', 'A'),
         new Student(1, 'Bob', 'B'),
+        new Student(2, 'Jack', 'C'),
+        new Student(3, 'Dave', 'D')
       ];
 
     console.log("student data", JSON.stringify(students));
@@ -25,7 +29,7 @@ async function mockFetchStudents() {
                     headers: { 'Content-Type': 'application/json' }
                   })
             );
-        }, 1000);
+        }, 3000);
     });
 }
 
@@ -50,6 +54,7 @@ function getStudentUsingPromise() {
         return data.map((item) => new Student(item.id, item.name, item.grade)); // wrap the Student object into Promise
     })
     .then((students) => {
+        console.log("Promise result");
         students.forEach((s) => console.log(s.display()));
     })
     .catch(error => {
@@ -74,8 +79,9 @@ async function fetchStudentsUsingAsyncAwait() {
             throw new Error("Unexpected response format");
         }
         
-        const students = data.map((item)=> new Student(item));
-        console.log(students);
+        const students = data.map((item)=> new Student(item.id, item.name, item.grade));
+        console.log("Async-await result");
+        students.forEach(student => console.log(student.display()));
 
 
     } catch(error) {
@@ -84,4 +90,5 @@ async function fetchStudentsUsingAsyncAwait() {
 }
 
 getStudentUsingPromise();
+
 fetchStudentsUsingAsyncAwait();
