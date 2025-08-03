@@ -175,8 +175,25 @@ console.log(studentMap.get(2));
 // convert back from map to array objects
 
 const studentArray = Array.from(studentMap, ([key, value]) => ({
-  ...value,
-  key  // optionally include the original key
+  ...value
 }));
 
 //Set
+
+const noSet = new Set([1,2,3]);
+noSet.add(4);
+noSet.add(5);
+
+console.log(noSet);
+
+// convert Set to an Array
+
+const arr = [...noSet]; //OR Array.from(noSet)
+console.log(arr);
+
+
+// convert an array to set
+
+const nonUniqueNo = [1,2,3,3,4,5,5,6,7,7,8,8,9,10];
+const unique = new Set(nonUniqueNo);
+console.log([...unique]);
